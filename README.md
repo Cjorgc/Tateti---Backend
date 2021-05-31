@@ -1,24 +1,37 @@
-# README
+# Endpoints
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Board
 
-Things you may want to cover:
+- Crear Board
 
-* Ruby version
+<p> Crea un tablero, puede contener el id de los jugadores </p>
 
-* System dependencies
+      POST /boards
+      
+### Examples
 
-* Configuration
+Body
+```
+{
+    "player_x" : "1",
+    "player_o" : "2"
+}
+```
 
-* Database creation
+<p> Tambien se puede crear un tablero sin jugadores asociados (cuando no están logeados), en éste caso el body irá vacio </p>
 
-* Database initialization
+- Realizar movimiento
 
-* How to run the test suite
+<p> Realiza un movimiento en el casillero indicado, por el jugador indicado </p>
 
-* Services (job queues, cache servers, search engines, etc.)
+    POST /boards/move
 
-* Deployment instructions
-
-* ...
+### Examples
+Body
+```
+{
+    "id" : "1",
+    "square" : "square00",
+    "player" : "X"
+}
+```
