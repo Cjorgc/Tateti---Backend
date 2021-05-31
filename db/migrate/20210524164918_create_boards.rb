@@ -13,6 +13,8 @@ class CreateBoards < ActiveRecord::Migration[6.1]
 			t.string :next_player_expected , default: "X"
 			t.boolean :finished, default: false
 			t.string :winner		
+			t.references :player_x
+			t.references :player_o
 
       t.timestamps
     end

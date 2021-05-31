@@ -25,8 +25,12 @@ ActiveRecord::Schema.define(version: 2021_05_25_223230) do
     t.string "next_player_expected", default: "X"
     t.boolean "finished", default: false
     t.string "winner"
+    t.integer "player_x_id"
+    t.integer "player_o_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["player_o_id"], name: "index_boards_on_player_o_id"
+    t.index ["player_x_id"], name: "index_boards_on_player_x_id"
   end
 
   create_table "games", force: :cascade do |t|
