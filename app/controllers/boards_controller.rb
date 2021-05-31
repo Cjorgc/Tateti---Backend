@@ -23,7 +23,7 @@ class BoardsController < ApplicationController
 		
 
 		if board.save
-			render json: board.to_json(except: [:created_at, :updated_at])
+			render json: board.to_json(except: [:created_at, :updated_at]) , status:200
 		else
 			render json: board.errors.full_messages
 		end

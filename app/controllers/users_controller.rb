@@ -8,9 +8,9 @@ class UsersController < ApplicationController
 	def register
 		user = User.new(user_params)
 		if user.save
-			render json: user
+			render json: user.to_json(only: [:token]),status: 200
 		else
-				render json: user.errors ,status: 401 	
+				render json: user.errors.full_messages ,status: 401 	
 		end
 	end
 	
@@ -19,7 +19,7 @@ class UsersController < ApplicationController
 		if user.present? && user.valid_password?(params[:password])
 			render json: {token: user.token} , status:200
 		else
-			render json: user.errors
+			render json: user.errors.full_messages
 		end
 	end	
 
@@ -27,11 +27,16 @@ class UsersController < ApplicationController
 		if user.remove_token
 			render status:200
 		else
-			render json: user.errors
+			render json: user.errors.full_messages
 		end
 	end
 	def show
-		
+		user = User.find_by(id: params[:id])
+		if user
+			render json: user.to_json(include: [:boards]) 
+		else
+			render json: "Usuario no encontrado"
+		end	
 	end
 
 	def destroy
